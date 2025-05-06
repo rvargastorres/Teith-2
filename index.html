@@ -1,0 +1,681 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DeepSite - Haz brillar tu negocio en Internet</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Nunito Sans', sans-serif;
+            scroll-behavior: smooth;
+        }
+        .hero-gradient {
+            background: linear-gradient(135deg, #2A5C8B 0%, #28A745 100%);
+        }
+        .chatbot-avatar {
+            background-color: #2A5C8B;
+            color: white;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        .service-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+        .video-container {
+            position: relative;
+            padding-bottom: 56.25%;
+            height: 0;
+            overflow: hidden;
+        }
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+        .exit-popup {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+        }
+        .chat-window {
+            display: none;
+            position: fixed;
+            bottom: 90px;
+            right: 30px;
+            width: 350px;
+            max-width: 90%;
+            height: 500px;
+            max-height: 70vh;
+            background-color: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+            z-index: 100;
+            flex-direction: column;
+        }
+        @media (max-width: 768px) {
+            .chat-window {
+                width: 90%;
+                right: 5%;
+            }
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Navigation -->
+    <nav class="bg-white shadow-md py-4 sticky top-0 z-50">
+        <div class="container mx-auto px-4 flex justify-between items-center">
+            <div class="flex items-center">
+                <span class="text-2xl font-bold text-[#2A5C8B]">DeepSite</span>
+            </div>
+            <div class="hidden md:flex space-x-8">
+                <a href="#servicios" class="text-gray-700 hover:text-[#28A745] font-semibold">Servicios</a>
+                <a href="#tour" class="text-gray-700 hover:text-[#28A745] font-semibold">Tour Virtual</a>
+                <a href="#precios" class="text-gray-700 hover:text-[#28A745] font-semibold">Precios</a>
+                <a href="#testimonios" class="text-gray-700 hover:text-[#28A745] font-semibold">Testimonios</a>
+            </div>
+            <div class="md:hidden">
+                <button id="mobile-menu-button" class="text-gray-700">
+                    <i class="fas fa-bars text-2xl"></i>
+                </button>
+            </div>
+        </div>
+        <!-- Mobile menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white absolute w-full left-0 px-4 pb-4 shadow-md">
+            <a href="#servicios" class="block py-2 text-gray-700 hover:text-[#28A745] font-semibold">Servicios</a>
+            <a href="#tour" class="block py-2 text-gray-700 hover:text-[#28A745] font-semibold">Tour Virtual</a>
+            <a href="#precios" class="block py-2 text-gray-700 hover:text-[#28A745] font-semibold">Precios</a>
+            <a href="#testimonios" class="block py-2 text-gray-700 hover:text-[#28A745] font-semibold">Testimonios</a>
+            <a href="#contacto" class="block py-2 px-4 mt-2 bg-[#28A745] text-white rounded-full text-center font-semibold">Contacto</a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero-gradient text-white py-16 md:py-24">
+        <div class="container mx-auto px-4 flex flex-col md:flex-row items-center">
+            <div class="md:w-1/2 mb-10 md:mb-0">
+                <h1 class="text-3xl md:text-5xl font-bold mb-6">¿Quieres que tu negocio brille en Internet? Nosotros lo hacemos realidad sin que tú te preocupes 🚀</h1>
+                <p class="text-xl mb-8">Te creamos una web que atrae clientes, responde preguntas automáticamente y muestra tu negocio como si estuvieran ahí. Sin palabras raras. Sin complicaciones.</p>
+                <a href="#contacto" class="bg-[#28A745] hover:bg-[#218838] text-white font-bold py-4 px-8 rounded-full text-lg shadow-lg transition duration-300 inline-flex items-center">
+                    Quiero mi web gratis por 7 días <i class="fas fa-arrow-right ml-2"></i>
+                </a>
+            </div>
+            <div class="md:w-1/2 flex justify-center">
+                <div class="video-container rounded-xl overflow-hidden shadow-2xl">
+                    <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Storytelling Section -->
+    <section class="py-16 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl md:text-4xl font-bold text-[#2A5C8B] mb-4">Imagina esto…</h2>
+                <p class="text-xl text-gray-700 max-w-3xl mx-auto">Imagina que tu restaurante tiene una web donde tus clientes:</p>
+            </div>
+            
+            <div class="flex flex-col md:flex-row items-center">
+                <div class="md:w-1/2 mb-10 md:mb-0">
+                    <ul class="space-y-6 text-lg">
+                        <li class="flex items-start">
+                            <span class="bg-[#28A745] text-white rounded-full w-8 h-8 flex items-center justify-center mr-4 flex-shrink-0">1</span>
+                            <span>Recorren tus mesas con un tour virtual como si estuvieran ahí.</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="bg-[#28A745] text-white rounded-full w-8 h-8 flex items-center justify-center mr-4 flex-shrink-0">2</span>
+                            <span>Preguntan al chat "¿Tenéis menú vegano?" y reciben la respuesta al instante.</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="bg-[#28A745] text-white rounded-full w-8 h-8 flex items-center justify-center mr-4 flex-shrink-0">3</span>
+                            <span>Encuentran tu negocio en Google antes que a la competencia. Y tú solo te dedicas a lo que amas: tu negocio.</span>
+                        </li>
+                    </ul>
+                </div>
+                <div class="md:w-1/2">
+                    <div class="bg-gray-100 rounded-xl overflow-hidden shadow-lg">
+                        <img src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1074&q=80" alt="Restaurante con tour virtual" class="w-full h-auto">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="servicios" class="py-16 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl md:text-4xl font-bold text-[#2A5C8B] mb-4">Esto es lo que hacemos por ti (explicado para humanos)</h2>
+                <p class="text-xl text-gray-700 max-w-3xl mx-auto">Soluciones simples para que tu negocio crezca sin que tengas que aprender tecnología</p>
+            </div>
+            
+            <div class="grid md:grid-cols-3 gap-8">
+                <!-- Service Card 1 -->
+                <div class="bg-white rounded-xl shadow-md p-6 service-card transition duration-300">
+                    <div class="flex items-center mb-4">
+                        <span class="text-3xl mr-3">🌐</span>
+                        <span class="text-3xl">💬</span>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3 text-[#2A5C8B]">Tu negocio en Internet con superpoderes 🦸</h3>
+                    <p class="text-gray-700 mb-4">Creamos tu web con un chat inteligente que contesta preguntas de clientes (ej: "¿A qué hora cerráis?") y tour virtual para que vean tu local desde casa. Incluye todo: fotos, menús, promociones… ¡y aparece en Google!</p>
+                    <p class="text-sm text-gray-500 italic">"Como el tour del Bar La Esquina, que ahora recibe 50% más reservas."</p>
+                </div>
+                
+                <!-- Service Card 2 -->
+                <div class="bg-white rounded-xl shadow-md p-6 service-card transition duration-300">
+                    <div class="flex items-center mb-4">
+                        <span class="text-3xl mr-3">📈</span>
+                        <span class="text-3xl">🤖</span>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3 text-[#2A5C8B]">Clientes que te encuentran sin esfuerzo 🔍</h3>
+                    <p class="text-gray-700 mb-4">Nos encargamos de que tu web salga primera en Google (sí, como cuando buscas "mejor pizzeria en [ciudad]"). Y si alguien te escribe por Instagram, nuestro robot les responde en 2 segundos.</p>
+                </div>
+                
+                <!-- Service Card 3 -->
+                <div class="bg-white rounded-xl shadow-md p-6 service-card transition duration-300">
+                    <div class="flex items-center mb-4">
+                        <span class="text-3xl mr-3">🛡️</span>
+                        <span class="text-3xl">📱</span>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3 text-[#2A5C8B]">Todo seguro y sin quebraderos de cabeza 🔒</h3>
+                    <p class="text-gray-700 mb-4">Protegemos tu web de hackers, actualizamos todo automáticamente y si algo falla, nosotros lo arreglamos en 1 hora (prometido).</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Virtual Tour Section -->
+    <section id="tour" class="py-16 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row items-center">
+                <div class="md:w-1/2 mb-10 md:mb-0 md:pr-10">
+                    <h2 class="text-3xl md:text-4xl font-bold text-[#2A5C8B] mb-6">Haz que tus clientes visiten tu negocio desde el sofá 🛋️→ 🏪</h2>
+                    <p class="text-xl text-gray-700 mb-6">¿Tienes un local con encanto? Muéstralo al mundo. 40% de los clientes reservan después de hacer un tour virtual (datos reales de 2024).</p>
+                    <a href="#contacto" class="bg-[#28A745] hover:bg-[#218838] text-white font-bold py-3 px-6 rounded-full text-lg shadow-lg transition duration-300 inline-flex items-center">
+                        Quiero mi tour virtual <i class="fas fa-arrow-right ml-2"></i>
+                    </a>
+                </div>
+                <div class="md:w-1/2">
+                    <div class="video-container rounded-xl overflow-hidden shadow-2xl">
+                        <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section id="testimonios" class="py-16 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl md:text-4xl font-bold text-[#2A5C8B] mb-4">Lo que dicen dueños de negocios como el tuyo</h2>
+            </div>
+            
+            <div class="grid md:grid-cols-3 gap-8">
+                <!-- Testimonial 1 -->
+                <div class="bg-white rounded-xl shadow-md p-6">
+                    <div class="flex items-center mb-4">
+                        <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5cd?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=688&q=80" alt="Carla" class="w-16 h-16 rounded-full object-cover mr-4">
+                        <div>
+                            <h4 class="font-bold">Carla</h4>
+                            <p class="text-gray-600 text-sm">Tienda de ropa "Moda Clara"</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-700 italic">"No sabía nada de tecnología, y en 1 semana ya tenía mi web funcionando. Ahora vendo 3 veces más gracias al chat 24/7 que contesta a mis clientes."</p>
+                </div>
+                
+                <!-- Testimonial 2 -->
+                <div class="bg-white rounded-xl shadow-md p-6">
+                    <div class="flex items-center mb-4">
+                        <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80" alt="Juan" class="w-16 h-16 rounded-full object-cover mr-4">
+                        <div>
+                            <h4 class="font-bold">Juan</h4>
+                            <p class="text-gray-600 text-sm">Panadería "Dulce Hogar"</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-700 italic">"El tour virtual de mi panadería ha sido un éxito. Mis clientes pueden ver el horno de leña y los productos frescos antes de venir. ¡Reservas han aumentado un 60%!"</p>
+                </div>
+                
+                <!-- Testimonial 3 -->
+                <div class="bg-white rounded-xl shadow-md p-6">
+                    <div class="flex items-center mb-4">
+                        <img src="https://images.unsplash.com/photo-1545165375-1a0467650b0a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=688&q=80" alt="María" class="w-16 h-16 rounded-full object-cover mr-4">
+                        <div>
+                            <h4 class="font-bold">María</h4>
+                            <p class="text-gray-600 text-sm">Restaurante "Sabor Casero"</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-700 italic">"Ahora aparezco primero cuando buscan 'mejor restaurante en mi ciudad'. El chat contesta preguntas sobre alergenos y menús. ¡Tranquilidad total!"</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section id="precios" class="py-16 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl md:text-4xl font-bold text-[#2A5C8B] mb-4">Planes tan simples como tu negocio lo necesita 💸</h2>
+                <p class="text-xl text-gray-700 max-w-3xl mx-auto">Elige el que mejor se adapte a ti. Todos incluyen soporte 24/7 y garantía de satisfacción.</p>
+            </div>
+            
+            <div class="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+                <!-- Plan Básico -->
+                <div class="bg-white rounded-xl shadow-lg border-2 border-gray-200 p-6">
+                    <h3 class="text-xl font-bold mb-2 text-[#2A5C8B]">Para empezar a brillar</h3>
+                    <p class="text-gray-600 mb-4">Ideal para negocios que quieren su primera web profesional</p>
+                    <div class="mb-6">
+                        <span class="text-4xl font-bold">€300</span>
+                        <span class="text-gray-600">/mes</span>
+                    </div>
+                    <ul class="space-y-3 mb-8">
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-[#28A745] mt-1 mr-2"></i>
+                            <span>Web profesional responsive</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-[#28A745] mt-1 mr-2"></i>
+                            <span>Chat básico para preguntas frecuentes</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-[#28A745] mt-1 mr-2"></i>
+                            <span>SEO local básico</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-[#28A745] mt-1 mr-2"></i>
+                            <span>Actualizaciones automáticas</span>
+                        </li>
+                    </ul>
+                    <a href="#contacto" class="block w-full bg-[#28A745] hover:bg-[#218838] text-white font-bold py-3 px-6 rounded-full text-center shadow-lg transition duration-300">
+                        Empezar ahora
+                    </a>
+                </div>
+                
+                <!-- Plan TOP -->
+                <div class="bg-white rounded-xl shadow-xl border-2 border-[#28A745] relative p-6 transform scale-105">
+                    <div class="absolute top-0 right-0 bg-[#28A745] text-white text-xs font-bold px-3 py-1 rounded-bl-lg rounded-tr-lg">MÁS POPULAR</div>
+                    <h3 class="text-xl font-bold mb-2 text-[#2A5C8B]">El más pedido</h3>
+                    <p class="text-gray-600 mb-4">Para negocios que quieren destacar y vender más</p>
+                    <div class="mb-6">
+                        <span class="text-4xl font-bold">€600</span>
+                        <span class="text-gray-600">/mes</span>
+                    </div>
+                    <ul class="space-y-3 mb-8">
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-[#28A745] mt-1 mr-2"></i>
+                            <span>Web premium con tour virtual</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-[#28A745] mt-1 mr-2"></i>
+                            <span>Chat con IA avanzada</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-[#28A745] mt-1 mr-2"></i>
+                            <span>SEO local avanzado</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-[#28A745] mt-1 mr-2"></i>
+                            <span>Publicidad en Google incluida</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-[#28A745] mt-1 mr-2"></i>
+                            <span>Soporte prioritario 24/7</span>
+                        </li>
+                    </ul>
+                    <a href="#contacto" class="block w-full bg-[#28A745] hover:bg-[#218838] text-white font-bold py-3 px-6 rounded-full text-center shadow-lg transition duration-300">
+                        Quiero el TOP
+                    </a>
+                </div>
+                
+                <!-- Plan Personalizado -->
+                <div class="bg-white rounded-xl shadow-lg border-2 border-gray-200 p-6">
+                    <h3 class="text-xl font-bold mb-2 text-[#2A5C8B]">¿Necesitas algo único?</h3>
+                    <p class="text-gray-600 mb-4">Solución a medida para tu negocio</p>
+                    <div class="mb-6">
+                        <span class="text-4xl font-bold">€?</span>
+                        <span class="text-gray-600">/mes</span>
+                    </div>
+                    <ul class="space-y-3 mb-8">
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-[#28A745] mt-1 mr-2"></i>
+                            <span>Desarrollo personalizado</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-[#28A745] mt-1 mr-2"></i>
+                            <span>Integraciones especiales</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-[#28A745] mt-1 mr-2"></i>
+                            <span>Marketing digital completo</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-[#28A745] mt-1 mr-2"></i>
+                            <span>Asesoramiento personalizado</span>
+                        </li>
+                    </ul>
+                    <a href="#contacto" class="block w-full bg-white hover:bg-gray-100 text-[#28A745] font-bold py-3 px-6 rounded-full text-center border-2 border-[#28A745] shadow-lg transition duration-300">
+                        Cuéntanos tu idea
+                    </a>
+                </div>
+            </div>
+            
+            <div class="text-center mt-12">
+                <p class="text-lg text-gray-700">7 días gratis. Si no te convence, te devolvemos el 100% 🤝</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contacto" class="py-16 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <div class="max-w-4xl mx-auto bg-white rounded-xl shadow-lg overflow-hidden">
+                <div class="md:flex">
+                    <div class="md:w-1/2 bg-[#2A5C8B] text-white p-8 md:p-12">
+                        <h2 class="text-3xl font-bold mb-6">Hablemos de tu negocio</h2>
+                        <p class="mb-6">Déjanos tus datos y te llamaremos en menos de 24 horas para ofrecerte una demo gratuita de 7 días.</p>
+                        <div class="space-y-4">
+                            <div class="flex items-start">
+                                <i class="fas fa-phone-alt mt-1 mr-3"></i>
+                                <div>
+                                    <h4 class="font-bold">Teléfono</h4>
+                                    <p>+34 123 456 789</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start">
+                                <i class="fas fa-envelope mt-1 mr-3"></i>
+                                <div>
+                                    <h4 class="font-bold">Email</h4>
+                                    <p>hola@deepsite.com</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start">
+                                <i class="fas fa-clock mt-1 mr-3"></i>
+                                <div>
+                                    <h4 class="font-bold">Horario</h4>
+                                    <p>Lunes a Viernes: 9:00 - 18:00</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="md:w-1/2 p-8 md:p-12">
+                        <h3 class="text-2xl font-bold text-[#2A5C8B] mb-6">Prueba gratis por 7 días</h3>
+                        <form id="contact-form" class="space-y-4">
+                            <div>
+                                <label for="name" class="block text-gray-700 mb-2">Nombre</label>
+                                <input type="text" id="name" name="name" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#28A745] focus:border-transparent" required>
+                            </div>
+                            <div>
+                                <label for="email" class="block text-gray-700 mb-2">Email</label>
+                                <input type="email" id="email" name="email" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#28A745] focus:border-transparent" required>
+                            </div>
+                            <div>
+                                <label for="phone" class="block text-gray-700 mb-2">Teléfono</label>
+                                <input type="tel" id="phone" name="phone" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#28A745] focus:border-transparent" required>
+                            </div>
+                            <div class="flex items-start">
+                                <input type="checkbox" id="demo" name="demo" class="mt-1 mr-2" checked>
+                                <label for="demo" class="text-gray-700">Sí, quiero una demo gratis</label>
+                            </div>
+                            <button type="submit" class="w-full bg-[#28A745] hover:bg-[#218838] text-white font-bold py-3 px-6 rounded-full shadow-lg transition duration-300">
+                                Enviar solicitud <i class="fas fa-arrow-right ml-2"></i>
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-[#2A5C8B] text-white py-12">
+        <div class="container mx-auto px-4">
+            <div class="grid md:grid-cols-4 gap-8 mb-8">
+                <div>
+                    <h3 class="text-xl font-bold mb-4">DeepSite</h3>
+                    <p class="mb-4">Hacemos que tu negocio brille en Internet sin complicaciones.</p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-white hover:text-[#28A745]"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="text-white hover:text-[#28A745]"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="text-white hover:text-[#28A745]"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                <div>
+                    <h3 class="text-xl font-bold mb-4">Servicios</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="hover:text-[#28A745]">Webs con chat inteligente</a></li>
+                        <li><a href="#" class="hover:text-[#28A745]">Tours virtuales</a></li>
+                        <li><a href="#" class="hover:text-[#28A745]">Posicionamiento en Google</a></li>
+                        <li><a href="#" class="hover:text-[#28A745]">Chatbots para redes</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-xl font-bold mb-4">Recursos</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="hover:text-[#28A745]">Blog</a></li>
+                        <li><a href="#" class="hover:text-[#28A745]">Preguntas frecuentes</a></li>
+                        <li><a href="#" class="hover:text-[#28A745]">Casos de éxito</a></li>
+                        <li><a href="#" class="hover:text-[#28A745]">Guías para negocios</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-xl font-bold mb-4">Legal</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="hover:text-[#28A745]">Términos y condiciones</a></li>
+                        <li><a href="#" class="hover:text-[#28A745]">Política de privacidad</a></li>
+                        <li><a href="#" class="hover:text-[#28A745]">Cookies</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-600 pt-8">
+                <div class="flex flex-col md:flex-row justify-between items-center">
+                    <div class="mb-4 md:mb-0">
+                        <p>© 2024 DeepSite. Todos los derechos reservados.</p>
+                    </div>
+                    <div class="flex items-center space-x-6">
+                        <div class="flex items-center">
+                            <i class="fas fa-lock mr-2"></i>
+                            <span>Protegido por SSL</span>
+                        </div>
+                        <div class="flex items-center">
+                            <i class="fab fa-cc-stripe mr-2 text-2xl"></i>
+                            <span>Pago seguro con Stripe</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="mt-4 text-center md:text-left">
+                    <p>Más de 200 negocios felices desde 2024</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Chatbot Button -->
+    <div id="chatbot-button" class="fixed bottom-6 right-6 z-50 cursor-pointer">
+        <div class="chatbot-avatar">
+            <i class="fas fa-robot text-2xl"></i>
+        </div>
+    </div>
+
+    <!-- Chatbot Window -->
+    <div id="chat-window" class="chat-window">
+        <div class="bg-[#2A5C8B] text-white p-4 rounded-t-lg flex items-center">
+            <div class="w-8 h-8 rounded-full bg-white flex items-center justify-center mr-3">
+                <i class="fas fa-robot text-[#2A5C8B]"></i>
+            </div>
+            <div>
+                <h4 class="font-bold">Ana, tu asistente digital</h4>
+                <p class="text-xs">En línea</p>
+            </div>
+            <button id="close-chat" class="ml-auto text-white">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <div id="chat-messages" class="flex-1 p-4 overflow-y-auto bg-gray-50">
+            <div class="mb-4">
+                <div class="bg-white rounded-lg p-3 shadow max-w-[80%]">
+                    <p>¡Hola! Soy Ana, tu asistente digital. ¿En qué te ayudo? 😊</p>
+                    <p class="mt-1 text-sm text-gray-500">Ej: ¿Cuánto cuesta una web con tour virtual?</p>
+                </div>
+            </div>
+        </div>
+        <div class="p-4 border-t border-gray-200 bg-white">
+            <div class="flex">
+                <input type="text" id="chat-input" placeholder="Escribe tu pregunta..." class="flex-1 px-4 py-2 border border-gray-300 rounded-l-lg focus:outline-none focus:ring-1 focus:ring-[#28A745]">
+                <button id="send-message" class="bg-[#28A745] text-white px-4 py-2 rounded-r-lg hover:bg-[#218838]">
+                    <i class="fas fa-paper-plane"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Exit Popup -->
+    <div id="exit-popup" class="exit-popup">
+        <div class="bg-white rounded-xl p-8 max-w-md mx-4">
+            <h3 class="text-2xl font-bold text-[#2A5C8B] mb-4">¡Espera!</h3>
+            <p class="mb-6">¿Necesitas ayuda? Te regalamos una consulta gratis con nuestro experto.</p>
+            <div class="flex flex-col sm:flex-row space-y-3 sm:space-y-0 sm:space-x-3">
+                <a href="#contacto" class="bg-[#28A745] hover:bg-[#218838] text-white font-bold py-3 px-6 rounded-full text-center shadow-lg transition duration-300">
+                    Quiero mi consulta gratis
+                </a>
+                <button id="close-popup" class="bg-gray-200 hover:bg-gray-300 text-gray-800 font-bold py-3 px-6 rounded-full shadow-lg transition duration-300">
+                    No, gracias
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Mobile menu toggle
+        document.getElementById('mobile-menu-button').addEventListener('click', function() {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('hidden');
+        });
+
+        // Chatbot toggle
+        const chatbotButton = document.getElementById('chatbot-button');
+        const chatWindow = document.getElementById('chat-window');
+        const closeChat = document.getElementById('close-chat');
+
+        chatbotButton.addEventListener('click', function() {
+            chatWindow.style.display = 'flex';
+        });
+
+        closeChat.addEventListener('click', function() {
+            chatWindow.style.display = 'none';
+        });
+
+        // Chat functionality
+        const chatInput = document.getElementById('chat-input');
+        const sendMessage = document.getElementById('send-message');
+        const chatMessages = document.getElementById('chat-messages');
+
+        function addMessage(text, isUser = false) {
+            const messageDiv = document.createElement('div');
+            messageDiv.className = 'mb-4';
+            
+            const messageContent = document.createElement('div');
+            messageContent.className = isUser ? 
+                'bg-[#28A745] text-white rounded-lg p-3 shadow max-w-[80%] ml-auto' :
+                'bg-white rounded-lg p-3 shadow max-w-[80%]';
+            messageContent.innerHTML = `<p>${text}</p>`;
+            
+            messageDiv.appendChild(messageContent);
+            chatMessages.appendChild(messageDiv);
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+        }
+
+        sendMessage.addEventListener('click', function() {
+            const message = chatInput.value.trim();
+            if (message) {
+                addMessage(message, true);
+                chatInput.value = '';
+                
+                // Simulate bot response
+                setTimeout(() => {
+                    const responses = [
+                        "¡Buena pregunta! Nuestros planes empiezan desde €300/mes. ¿Quieres que te explique las diferencias?",
+                        "El tour virtual es perfecto para restaurantes y tiendas. ¿Qué tipo de negocio tienes?",
+                        "Puedo conectar con un experto humano si lo prefieres. ¿Te interesa?",
+                        "Todos nuestros planes incluyen 7 días gratis para que pruebes sin compromiso."
+                    ];
+                    const randomResponse = responses[Math.floor(Math.random() * responses.length)];
+                    addMessage(randomResponse);
+                }, 1000);
+            }
+        });
+
+        chatInput.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                sendMessage.click();
+            }
+        });
+
+        // Exit intent popup
+        let mouseY = 0;
+        document.addEventListener('mousemove', function(e) {
+            mouseY = e.clientY;
+            
+            if (mouseY < 50) {
+                const popup = document.getElementById('exit-popup');
+                if (!localStorage.getItem('popupShown')) {
+                    popup.style.display = 'flex';
+                    localStorage.setItem('popupShown', 'true');
+                }
+            }
+        });
+
+        document.getElementById('close-popup').addEventListener('click', function() {
+            document.getElementById('exit-popup').style.display = 'none';
+        });
+
+        // Form submission
+        document.getElementById('contact-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('¡Gracias por tu interés! Nos pondremos en contacto contigo en menos de 24 horas.');
+            this.reset();
+        });
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    targetElement.scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                    
+                    // Close mobile menu if open
+                    const mobileMenu = document.getElementById('mobile-menu');
+                    if (!mobileMenu.classList.contains('hidden')) {
+                        mobileMenu.classList.add('hidden');
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>
